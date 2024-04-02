@@ -1,0 +1,8 @@
+*.asv
+/api.txt
+/FredFetch/
+/oilsupplynews/
+/Outputs/
+/private/autocorrNoMean.m
+/Release/
+/Release.zip
