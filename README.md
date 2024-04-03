@@ -3,11 +3,13 @@ contributors:
   - Tom D. Holden
 ---
 
-# README document for the replication code for the paper "Robust Real Rate Rules" by Tom D. Holden, to be published in Econometrica
+# README document for the replication code for the paper "Robust Real Rate Rules" by [Tom D. Holden](https://www.tholden.org/), to be published in Econometrica
 
 **Tom D. Holden**
 
 *The views expressed in this document are those of the author and do not represent the views of the Deutsche Bundesbank, the Eurosystem or its staﬀ.*
+
+This document and the corresponding code and data originate from [the GitHub repository here](https://github.com/tholden/RobustRealRateRulesReplication).
 
 ## Overview
 
