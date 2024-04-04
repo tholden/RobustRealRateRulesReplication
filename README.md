@@ -11,6 +11,8 @@ contributors:
 
 This document and the corresponding code and data originate from [the GitHub repository here](https://github.com/tholden/RobustRealRateRulesReplication).
 
+The working paper version of this paper and its appendices are available from [here](https://www.tholden.org/#robust-real-rate-rules).
+
 ## Overview
 
 The code in this replication package produces the numerical results, tables and figures from the paper "Robust Real Rate Rules" by [Tom D. Holden](https://www.tholden.org/) and from its [supplemental appendices](https://zenodo.org/records/10037239) (Holden 2024). The `Inputs` folder contains the source data, from [FRED](https://fred.stlouisfed.org/), [ALFRED](https://alfred.stlouisfed.org/), [the Survey of Professional Forecasters](https://www.philadelphiafed.org/surveys-and-data/real-time-data-research/median-forecasts), [Bauer & Swanson (2023)](https://www.michaeldbauer.com/files/FOMC_Bauer_Swanson.xlsx) and [Känzig (2021)](https://github.com/dkaenzig/oilsupplynews). All processing is performed by the MATLAB script `Main.m`, which saves all results in the `Outputs` folder, and which completes in around two minutes on a machine with 28 cores. Completion time may be proportionally longer on machines with fewer cores.
