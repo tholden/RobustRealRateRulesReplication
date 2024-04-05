@@ -21,6 +21,8 @@ The code in this replication package produces the numerical results, tables and 
 
 All source data is contained in the `Inputs` folder.
 
+Automatically converted CSV versions of the source data files are contained in the `InputsAsCSV` folder in the release. These are not contained in the source GitHub repository as they are generated as part of the release build script. Where the source data file had multiple sheets, these are saved in separate CSV files within one common folder.
+
 ### Statement about Rights
 
 - [x] I certify that the author(s) of the manuscript have legitimate access to and permission to use the data used in this manuscript. 
@@ -98,6 +100,8 @@ The code was last run on a **28-core Intel-based desktop with 256 GB of RAM, run
 
 * The MATLAB script `Main.m` generates all needed outputs, in the `Outputs` directory.
 * The functions in the folder `private` are called by `Main.m` to perform various sub-tasks.
+
+The source GitHub repository also contains the MATLAB script `MakeRelease.m` which builds the release package based on the source files.
 
 ### License for Code
 

@@ -1,4 +1,4 @@
-% This script is only used to build the release package. It requires PANDOC (https://pandoc.org/) to be installed in the system path.
+% This script is only used to build the release package. It requires PANDOC (https://pandoc.org/) and a LATEX interpret (like MIKTEX, https://miktex.org/) to be installed in the system path.
 
 close all;
 clear variables;
@@ -9,7 +9,7 @@ try
 catch
 end
 try
-    delete private/autocorrNoMean.m;
+    delete private/autocorrNoMean.m; % This is generated automatically by Main.m based on a file distributed with MATLAB.
 catch
 end
 warning( 'on', 'MATLAB:DELETE:FileNotFound' );
@@ -31,12 +31,63 @@ try
 catch
 end
 
+% Copy the core files.
 copyfile Inputs/*.xlsx Release/Inputs/ f;
 copyfile private/*.m Release/private/ f;
 copyfile Main.m Release/ f;
 copyfile *.md Release/ f;
 
+% Compile the PDF version of the README.
 !pandoc -f gfm -t pdf -o Release/README.pdf README.md
+
+% Produce CSV versions of all XLSX spreadsheets.
+try
+    mkdir Release/InputsAsCSV;
+catch
+end
+
+FileList = dir( 'Inputs' );
+
+for i = 1 : numel( FileList )
+
+    FileName = FileList( i ).name;
+
+    if ~endsWith( FileName, '.xlsx', 'IgnoreCase', true )
+        continue
+    end
+
+    NewFileOrFolderName = [ 'Release/InputsAsCSV/' FileName( 1 : ( end - 5 ) ) ];
+
+    FilePath = [ 'Inputs/' FileList( i ).name ];
+
+    SheetNames = sheetnames( FilePath );
+
+    if ~isscalar( SheetNames )
+
+        try
+            mkdir( NewFileOrFolderName );
+        catch
+        end
+
+    end
+
+    for j = 1 : numel( SheetNames )
+
+        SheetName = SheetNames{ j };
+
+        Table = readtable( FilePath, 'Sheet', SheetName, 'VariableNamingRule', 'preserve' );
+
+        if isscalar( SheetNames )
+            Separator = '';
+        else
+            Separator = [ '/' SheetName ];
+        end
+
+        writetable( Table, [ NewFileOrFolderName Separator '.csv' ], 'WriteVariableNames', ~all( startsWith( Table.Properties.VariableNames, 'Var', 'IgnoreCase', false ) ) );
+
+    end
+
+end
 
 cd Release/;
 zip ../Release.zip *;
