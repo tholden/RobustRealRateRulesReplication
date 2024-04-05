@@ -49,6 +49,8 @@ end
 
 FileList = dir( 'Inputs' );
 
+warning( 'off', 'MATLAB:table:ModifiedAndSavedVarnamesLengthMax' );
+
 for i = 1 : numel( FileList )
 
     FileName = FileList( i ).name;
@@ -78,6 +80,12 @@ for i = 1 : numel( FileList )
 
         Table = readtable( FilePath, 'Sheet', SheetName, 'VariableNamingRule', 'preserve' );
 
+        [ ~, WarningID ] = lastwarn( '', '' );
+
+        if strcmpi( WarningID, 'MATLAB:table:ModifiedAndSavedVarnamesLengthMax' )
+            Table = readtable( FilePath, 'Sheet', SheetName, 'ReadVariableNames', false );
+        end
+
         if isscalar( SheetNames )
             Separator = '';
         else
@@ -89,6 +97,8 @@ for i = 1 : numel( FileList )
     end
 
 end
+
+warning( 'on', 'MATLAB:table:ModifiedAndSavedVarnamesLengthMax' );
 
 cd Release/;
 zip ../Release.zip *;
