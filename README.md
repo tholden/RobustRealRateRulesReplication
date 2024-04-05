@@ -52,7 +52,7 @@ All data is in the public domain. No explicit copyright statements or restrictiv
 * From [the website of Michael Bauer](https://www.michaeldbauer.com/research/), with the replication data for Bauer & Swanson (2023):
   * [`FOMC_Bauer_Swanson.xlsx`](https://www.michaeldbauer.com/files/FOMC_Bauer_Swanson.xlsx)
 * From [the `oilsupplynews` GitHub repository of Diego Känzig](https://github.com/dkaenzig/oilsupplynews):
-  * [`OilSupplyNewsShocksKaenzig.xlsx`](https://github.com/dkaenzig/oilsupplynews/raw/master/oilSupplyNewsShocks_2023M06.xlsx) (Note, the original file name was `oilSupplyNewsShocks_2023M06.xlsx`.)
+  * [`OilSupplyNewsShocksKaenzig.xlsx`](https://github.com/dkaenzig/oilsupplynews/raw/master/oilSupplyNewsShocks_2023M06.xlsx) (Note, the original file name was different. It was `oilSupplyNewsShocks_2023M06.xlsx`.)
 
 ## Computational requirements
 
