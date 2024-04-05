@@ -396,12 +396,20 @@ CholCov = chol( cov( [ diff( beta ), diff( alpha ) ] ), 'lower' );
 
 OriginalParameters = [ CholCov( 2, 2 ); CholCov( 2, 1 ); CholCov( 1, 1 ); std( Residuals ) ];
 
-[ EstimatedModel, EstimatedParameters ] = estimate( Model, CPI, OriginalParameters, 'CovMethod', 'sandwich', 'Display', 'full', 'SquareRoot', true, 'Options', optimoptions( 'fminunc', 'Algorithm', 'quasi-newton', 'Display', 'iter-detailed', 'FiniteDifferenceType', 'central', 'MaxFunctionEvaluations', 1e12, 'MaxIterations', 1e12, 'OptimalityTolerance', 1e-12, 'StepTolerance', 1e-12, 'UseParallel', true ) );
+[ EstimatedModel, EstimatedParameters, EstimatedParametersCovariance ] = estimate( Model, CPI, OriginalParameters, 'CovMethod', 'sandwich', 'Display', 'full', 'SquareRoot', true, 'Options', optimoptions( 'fminunc', 'Algorithm', 'quasi-newton', 'Display', 'iter-detailed', 'FiniteDifferenceType', 'central', 'MaxFunctionEvaluations', 1e12, 'MaxIterations', 1e12, 'OptimalityTolerance', 1e-12, 'StepTolerance', 1e-12, 'UseParallel', true ) );
 
 disp( ' ' );
 disp( 'Initial and final parameters:' )
 disp( [ OriginalParameters, EstimatedParameters ] );
 disp( ' ' );
+
+
+disp( 'Final parameters in natural domain, with their standard error:' );
+ParamterNames = { 'sigma_alpha_alpha'; 'sigma_alpha_beta'; 'sigma_beta_beta'; 'sigma_epsilon' };
+StandardErrors = sqrt( diag( EstimatedParametersCovariance ) );
+disp( table( EstimatedParameters, StandardErrors, 'RowNames', ParamterNames ) );
+disp( ' ' );
+
 
 alpha_beta = smooth( EstimatedModel, CPI, 'SquareRoot', true );
 
@@ -692,7 +700,9 @@ disp( ' ' );
 NaturalDomainParameters = [ 2 ./ ( 1 + exp( -EstimatedParameters( 1 : 2 ) ) ) - 1; EstimatedParameters( 3 : 4 ); exp( EstimatedParameters( 5 : 8 ) ) ];
 DNaturalDomainParameters = [ 2 .* exp( -EstimatedParameters( 1 : 2 ) ) ./ ( 1 + exp( -EstimatedParameters( 1 : 2 ) ) ) .^ 2; ones( 2, 1 ); exp( EstimatedParameters( 5 : 8 ) ) ];
 disp( 'Final parameters in natural domain, with their delta method standard error:' );
-disp( [ NaturalDomainParameters, sqrt( diag( EstimatedParametersCovariance ) ) .* abs( DNaturalDomainParameters ) ] );
+ParamterNames = { 'rho_1'; 'rho_1Star'; 'psi_1'; 'psi_1Star'; 'sigma_1'; 'sigma_1Star'; 'sigma_infinity'; 'sigma_2' };
+DeltaMethodStandardErrors = sqrt( diag( EstimatedParametersCovariance ) ) .* abs( DNaturalDomainParameters );
+disp( table( NaturalDomainParameters, DeltaMethodStandardErrors, 'RowNames', ParamterNames ) );
 disp( ' ' );
 
 [ SmoothedState, ~, SmoothingOutput ] = smooth( EstimatedModel, Data, 'SquareRoot', true );
