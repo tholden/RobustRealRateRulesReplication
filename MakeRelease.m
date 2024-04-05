@@ -14,6 +14,7 @@ catch
 end
 warning( 'on', 'MATLAB:DELETE:FileNotFound' );
 
+warning( 'off', 'MATLAB:MKDIR:DirectoryExists' );
 try
     rmdir Release s;
 catch
@@ -38,7 +39,7 @@ copyfile Main.m Release/ f;
 copyfile *.md Release/ f;
 
 % Compile the PDF version of the README.
-!pandoc -f gfm -t pdf -o Release/README.pdf README.md
+!pandoc -f gfm -t pdf --pdf-engine=xelatex --shift-heading-level-by=-1 -V lang=en-GB -V boxlinks -V hyperrefoptions:pdfborderstyle="{/S/U/W 1}" -V hyperrefoptions:allbordercolors="{0 0 0}" -V papersize=a4 -V geometry:margin=1.25in -V mainfont="TeX Gyre Pagella" -o Release/README.pdf README.md
 
 % Produce CSV versions of all XLSX spreadsheets.
 try
@@ -97,3 +98,5 @@ try
     rmdir Release s;
 catch
 end
+
+warning( 'on', 'MATLAB:MKDIR:DirectoryExists' );
