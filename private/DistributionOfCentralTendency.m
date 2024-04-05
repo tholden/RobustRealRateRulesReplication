@@ -28,9 +28,19 @@ function DistributionOfCentralTendency( nu, Caption, FileName )
     disp( ' ' );
     disp( Table );
     disp( ' ' );
-    
+
     writetable( Table, FileName );
 
+    Table.Mean = 100 * ( Table.CentralTendencyMidPoint ./ Table.Mean - 1 );
+    Table.Median = 100 * ( Table.CentralTendencyMidPoint ./ Table.Median - 1 );
+    Table.CentralTendencyMidPoint = [];
+    
+    disp( ' ' );
+    disp( [ 'Efficiency loss (percent) of using the central tendency mid-point rather than the specified variable for the exercise in ' Caption ] );
+    disp( ' ' );
+    disp( Table );
+    disp( ' ' );
+    
 end
 
 
