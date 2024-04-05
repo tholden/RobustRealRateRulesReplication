@@ -15,7 +15,7 @@ The [working paper version of this paper](https://www.tholden.org/assets/files/R
 
 ## Overview
 
-The code in this replication package produces the numerical results, tables and figures from the paper "Robust Real Rate Rules" by [Tom D. Holden](https://www.tholden.org/) and from its [supplemental appendices](https://zenodo.org/records/10037239) (Holden 2024). The `Inputs` folder contains the source data, from [FRED](https://fred.stlouisfed.org/), [ALFRED](https://alfred.stlouisfed.org/), [the Survey of Professional Forecasters](https://www.philadelphiafed.org/surveys-and-data/real-time-data-research/median-forecasts), [Bauer & Swanson (2023)](https://www.michaeldbauer.com/files/FOMC_Bauer_Swanson.xlsx) and [Känzig (2021)](https://github.com/dkaenzig/oilsupplynews). All processing is performed by the MATLAB script `Main.m`, which saves all results in the `Outputs` folder, and which completes in around two minutes on a machine with 28 cores. Completion time may be proportionally longer on machines with fewer cores.
+The code in this replication package produces the numerical results, tables and figures from the paper "Robust Real Rate Rules" by [Tom D. Holden](https://www.tholden.org/) and from its [supplemental appendices](https://zenodo.org/records/10037239) (Holden 2024). The `Inputs` folder contains the source data, from [FRED](https://fred.stlouisfed.org/), [ALFRED](https://alfred.stlouisfed.org/), [the Survey of Professional Forecasters](https://www.philadelphiafed.org/surveys-and-data/real-time-data-research/median-forecasts), [Bauer & Swanson (2023)](https://www.michaeldbauer.com/files/FOMC_Bauer_Swanson.xlsx) and [Känzig (2021)](https://github.com/dkaenzig/oilsupplynews). All processing is performed by the MATLAB script `Main.m`, which saves all results in the `Outputs` folder, and which completes in around 90 seconds on a machine with 28 cores. Completion time may be proportionally longer on machines with fewer cores.
 
 ## Data Availability and Provenance Statements
 
@@ -94,7 +94,7 @@ Approximate free storage space needed:
 
 #### Details
 
-The code was last run on a **28-core Intel-based desktop with 256 GB of RAM, running Windows 11, with more than 1TB of free storage space**. Running `Main.m` took about 110 seconds. Completion time may be proportionally longer on machines with fewer cores.
+The code was last run on a **28-core Intel-based desktop with 256 GB of RAM, running Windows 11, with more than 1TB of free storage space**. Running `Main.m` took about 90 seconds. Completion time may be proportionally longer on machines with fewer cores.
 
 ## Description of programs/code
 
