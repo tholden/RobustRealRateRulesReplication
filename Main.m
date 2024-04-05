@@ -343,19 +343,19 @@ disp( ' ' );
 
 Delays = days( Data.HistoricalVintages_RealTimeCCRateCPI - ( Dates + calendarDuration( 0, 2, 0 ) ) );
 
-disp( 'In the merged sample, For CPI the number of delays over one month was (compared to the size of the sample):' );
+disp( 'In the merged sample, for CPI the number of delays over one month was (compared to the size of the sample):' );
 disp( [ sum( Delays > 0 ), T ] );
 disp( ' ' );
 
 Delays = days( Data.HistoricalVintages_RealTimeCCRatePCEPI - ( Dates + calendarDuration( 0, 1, 0 ) ) );
 
-disp( 'In the merged sample, for CPI the [median, mean, max] observation delay was:' );
+disp( 'In the merged sample, for PCEPI the [median, mean, max] observation delay was:' );
 disp( [ median( Delays ), mean( Delays ), max( Delays ) ]  );
 disp( ' ' );
 
 Delays = days( Data.HistoricalVintages_RealTimeCCRatePCEPI - ( Dates + calendarDuration( 0, 2, 0 ) ) );
 
-disp( 'In the merged sample, For CPI the number of delays over one month was (compared to the size of the sample):' );
+disp( 'In the merged sample, for PCEPI the number of delays over one month was (compared to the size of the sample):' );
 disp( [ sum( Delays > 0 ), T ] );
 disp( ' ' );
 
