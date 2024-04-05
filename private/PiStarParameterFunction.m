@@ -4,6 +4,7 @@ function [ A, B, C, D, Mean0, Cov0, StateType ] = PiStarParameterFunction( Param
     % State vector: 1 epsilonHat, 2 epsilonStarHat, 3 PiHat, 4 PiStarHat, 5 PiStarInfinity, 6 Pi0, 7 IMR0LInvPi0, 8 Pi12, 9 IMR12LInvPi12, 10 Pi24, 11 IMR24LInvPi24, 12 Pi36, 13 IMR36LInvPi36, 14 Pi, 15 PiStar, 16-28 LagPiStar1-LagPIStar13
     % Shock vector: 1 epsilonHat, 2 epsilonStarHat, 3 epsilonInfinity, 4 epsilon0, 5 epsilon12, 6 epsilon24, 7 epsilon36
     % Observables vector: 1-40 PiStarAnnual, 41 Pi, 42 PiStarInfinity
+    % Parameter vector: 1 Transformed rhoHat, 2 Transformed rhoStarHat, 3 psiHat, 4 psiStarHat, 5 log( sigmaHat ), 6 log( sigmaStarHat ), 7 log( sigmaInfinity ), 8 log( sigma2 )
 
     rho = @( s ) exp( -1 / ( 1 + s ) );
     scale = @( s ) ( 1 + s ) * rho( s ) ^ s;
