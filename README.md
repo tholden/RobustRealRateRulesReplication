@@ -9,9 +9,9 @@ contributors:
 
 *The views expressed in this document are those of the author and do not represent the views of the Deutsche Bundesbank, the Eurosystem or its staﬀ.*
 
-This document and the corresponding code and data originate from [the GitHub repository here](https://github.com/tholden/RobustRealRateRulesReplication).
+This document and the corresponding code and data originate from [the GitHub repository linked here](https://github.com/tholden/RobustRealRateRulesReplication).
 
-The [working paper version of this paper](https://www.tholden.org/assets/files/RobustRealRateRulesBody.pdf), its [online appendices](https://www.tholden.org/assets/files/RobustRealRateRulesOnlineAppendices.pdf) and [supplemental appendices](https://www.tholden.org/assets/files/RobustRealRateRulesSupplementalAppendices.pdf) are available from [here](https://www.tholden.org/#robust-real-rate-rules).
+The [working paper version of this paper](https://www.tholden.org/assets/files/RobustRealRateRulesBody.pdf), its [online appendices](https://www.tholden.org/assets/files/RobustRealRateRulesOnlineAppendices.pdf) and [supplemental appendices](https://www.tholden.org/assets/files/RobustRealRateRulesSupplementalAppendices.pdf) are available from [this link](https://www.tholden.org/#robust-real-rate-rules).
 
 ## Overview
 
