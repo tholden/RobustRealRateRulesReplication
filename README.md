@@ -1,6 +1,6 @@
 ---
-contributors:
-  - Tom D. Holden
+author:
+- Tom D. Holden
 ---
 
 # README document for the replication code for the paper "Robust Real Rate Rules" by [Tom D. Holden](https://www.tholden.org/), to be published in Econometrica
