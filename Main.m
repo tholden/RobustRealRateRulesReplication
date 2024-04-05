@@ -61,6 +61,8 @@ if DownloadLatestData
 
 end
 
+DGS5 = ReadFromFREDOrInputsFolder( 'DGS5', DownloadLatestData );
+
 LogCPIAUCSL   = ReadFromFREDOrInputsFolder( 'CPIAUCSL', DownloadLatestData, 'Log' );
 CCRateT5YIEM  = ReadFromFREDOrInputsFolder(   'T5YIEM', DownloadLatestData, 'CCRate' );
 CCRateT5YIFRM = ReadFromFREDOrInputsFolder(  'T5YIFRM', DownloadLatestData, 'CCRate' );
@@ -894,6 +896,10 @@ Dates( ( T + 1 ) : end ) = [];
 
 disp( 'Sample for the main regression (not including the observation consumed by the lag) (Y, Q, Y, Q):' );
 disp( [ year( Dates( 1 ) ), quarter( Dates( 1 ) ), year( Dates( end ) ), quarter( Dates( end ) ) ] );
+disp( ' ' );
+
+disp( 'Minimum annual yield on 5-year treasuries:' )
+disp( min( DGS5.DGS5 ) );
 disp( ' ' );
 
 Years = unique( year( Dates ) );

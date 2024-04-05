@@ -39,6 +39,7 @@ The files in the `Inputs` folder are listed below, along with their sources. Eac
 All data is in the public domain. No explicit copyright statements or restrictive licenses are given for any of these sources.
 
 * From [FRED](https://fred.stlouisfed.org/) (Federal Reserve Bank of St. Louis):
+  * [`DGS5.xlsx`](https://fred.stlouisfed.org/series/DGS5) (Board of Governors of the Federal Reserve System (US), Market Yield on U.S. Treasury Securities at 5-Year Constant Maturity, Quoted on an Investment Basis)
   * [`CPIAUCSL.xlsx`](https://fred.stlouisfed.org/series/CPIAUCSL) (U.S. Bureau of Labor Statistics, Consumer Price Index for All Urban Consumers: All Items in U.S. City Average.)
   * [`GS5.xlsx`](https://fred.stlouisfed.org/series/GS5) (Board of Governors of the Federal Reserve System (US), Market Yield on U.S. Treasury Securities at 5-Year Constant Maturity, Quoted on an Investment Basis.)
   * [`T5YIEM.xlsx`](https://fred.stlouisfed.org/series/T5YIEM) (Federal Reserve Bank of St. Louis, 5-Year Breakeven Inflation Rate.)
