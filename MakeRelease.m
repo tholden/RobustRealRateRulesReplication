@@ -1,4 +1,4 @@
-% This script is only used to build the release package. It requires PANDOC (https://pandoc.org/) and a LATEX interpret (like MIKTEX, https://miktex.org/) to be installed in the system path.
+% This script is only used to build the release package. It requires PANDOC (https://pandoc.org/) and a LATEX interpreter (like MIKTEX, https://miktex.org/) to be installed in the system path.
 
 close all;
 clear variables;
