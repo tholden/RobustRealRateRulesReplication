@@ -25,7 +25,7 @@ function Table = ObtainRealTimeGrowthRate( VariableName, DownloadVintageData )
             break
         end
 
-        disp( 'There seems to be a missing vintage between the following two dates:' );
+        disp( [ 'For variable ' VariableName ' there seems to be a missing vintage between the following two dates:' ] );
         disp( [ HistoricalVintages( MissingVintage ), HistoricalVintages( MissingVintage + 1 ) ] );
         disp( ' ' );
 
