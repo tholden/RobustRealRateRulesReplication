@@ -19,8 +19,6 @@ The code in this replication package produces the numerical results, tables and 
 
 All source data is contained in the `Inputs` folder.
 
-Automatically converted CSV versions of the source data files are contained in the `InputsAsCSV` folder in the release. These are not contained in the source GitHub repository as they are generated as part of the release build script. Where the source data file had multiple sheets, these are saved in separate CSV files within one common folder.
-
 ### Statement about Rights
 
 - [x] I certify that the author(s) of the manuscript have legitimate access to and permission to use the data used in this manuscript. 

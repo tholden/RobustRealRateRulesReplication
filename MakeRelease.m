@@ -41,65 +41,6 @@ copyfile *.md Release/ f;
 % Compile the PDF version of the README.
 !pandoc -f gfm -t pdf --pdf-engine=xelatex --shift-heading-level-by=-1 -V lang=en-GB -V boxlinks -V hyperrefoptions:pdfborderstyle="{/S/U/W 1}" -V hyperrefoptions:allbordercolors="{0 0 0}" -V papersize=a4 -V geometry:margin=1.25in -V mainfont="TeX Gyre Pagella" -o Release/README.pdf README.md
 
-% Produce CSV versions of all XLSX spreadsheets.
-try
-    mkdir Release/InputsAsCSV;
-catch
-end
-
-FileList = dir( 'Inputs' );
-
-warning( 'off', 'MATLAB:table:ModifiedAndSavedVarnamesLengthMax' );
-
-for i = 1 : numel( FileList )
-
-    FileName = FileList( i ).name;
-
-    if ~endsWith( FileName, '.xlsx', 'IgnoreCase', true )
-        continue
-    end
-
-    NewFileOrFolderName = [ 'Release/InputsAsCSV/' FileName( 1 : ( end - 5 ) ) ];
-
-    FilePath = [ 'Inputs/' FileList( i ).name ];
-
-    SheetNames = sheetnames( FilePath );
-
-    if ~isscalar( SheetNames )
-
-        try
-            mkdir( NewFileOrFolderName );
-        catch
-        end
-
-    end
-
-    for j = 1 : numel( SheetNames )
-
-        SheetName = SheetNames{ j };
-
-        Table = readtable( FilePath, 'Sheet', SheetName, 'VariableNamingRule', 'preserve' );
-
-        [ ~, WarningID ] = lastwarn( '', '' );
-
-        if strcmpi( WarningID, 'MATLAB:table:ModifiedAndSavedVarnamesLengthMax' )
-            Table = readtable( FilePath, 'Sheet', SheetName, 'ReadVariableNames', false );
-        end
-
-        if isscalar( SheetNames )
-            Separator = '';
-        else
-            Separator = [ '/' SheetName ];
-        end
-
-        writetable( Table, [ NewFileOrFolderName Separator '.csv' ], 'WriteVariableNames', ~all( startsWith( Table.Properties.VariableNames, 'Var', 'IgnoreCase', false ) ) );
-
-    end
-
-end
-
-warning( 'on', 'MATLAB:table:ModifiedAndSavedVarnamesLengthMax' );
-
 cd Release/;
 zip ../Release.zip *;
 cd ..;
