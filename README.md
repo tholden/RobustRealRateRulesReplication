@@ -96,9 +96,17 @@ The code was last run on a **28-core Intel-based desktop with 256 GB of RAM, run
 ## Description of programs/code
 
 * The MATLAB script `Main.m` generates all needed outputs, in the `Outputs` directory.
-* The functions in the folder `private` are called by `Main.m` to perform various sub-tasks.
-
-The source GitHub repository also contains the MATLAB script `MakeRelease.m` which builds the release package based on the source files.
+* The functions in the folder `private` are called by `Main.m` to perform various sub-tasks. These functions are listed below:
+  * `corrNoMean.m` - Computes the correlation between two mean zero variables.
+  * `DistributionOfCentralTendency.m` - Performs simulations to assess the performance of the central tendency midpoint as a measure of location, for Supplemental Appendix J.1.
+  * `GCVRidgeRegression.m` - Performs ridge regression with weight chosen by generalized cross validation. Only used to provide a rough initial estimate of the time varying parameter regression in Supplemental Appendix J.2.
+  * `GridFMinBound.m` - Minimises a function by performing an initial grid search then a finer search.
+  * `hacIV.m` - Performs instrumental variables regression by iterated GMM, with HAC standard errors.
+  * `ObtainHistoricalData.m` - Obtains multiple vintages of a FRED dataset, either from FRED or from the `Inputs` folder.
+  * `ObtainRealTimeGrowthRate.m` - Obtains real time data on the growth rate of a FRED variable.
+  * `PiStarParameterFunction.m` - Returns the transition matrices needed by the Kalman filter for the estimation exercise in Supplemental Appendix J.4.
+  * `ReadFromFREDOrInputsFolder.m` - Obtains current data on a single series from FRED or the `Inputs` folder.
+* The source GitHub repository also contains the MATLAB script `MakeRelease.m` which builds the release package based on the source files.
 
 ### License for Code
 
