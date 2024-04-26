@@ -44,6 +44,7 @@ end
 copyfile Inputs/*.xlsx Release/Inputs/ f;
 copyfile SmetsWouters2007/*.mod Release/SmetsWouters2007/ f;
 copyfile SmetsWouters2007/*.mat Release/SmetsWouters2007/ f;
+copyfile SmetsWouters2007/*.txt Release/SmetsWouters2007/ f;
 copyfile private/*.m Release/private/ f;
 copyfile Main.m Release/ f;
 copyfile *.md Release/ f;
