@@ -245,7 +245,12 @@ estimate( Model, diff( LogRealPCEPerCapita.LogA794RX0Q048SBEA ), 'AR0', 0.6, 'MA
 
 %% Examine how close (in some sense) the monetary rule of Smets Wouters (2007) is to a real rate rule.
 
-if ~isempty( DynarePath )
+if isempty( DynarePath )
+
+    disp( 'Dynare was not detected. Skipping the examination of how close (in some sense) the monetary rule of Smets Wouters (2007) is to a real rate rule.' );
+    disp( ' ' );
+
+else
 
     disp( 'Examination of how close (in some sense) the monetary rule of Smets Wouters (2007) is to a real rate rule.' );
     disp( ' ' );
