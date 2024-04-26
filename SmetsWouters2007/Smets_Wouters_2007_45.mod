@@ -106,6 +106,7 @@ var labobs      ${lHOURS}$      (long_name='log hours worked')
     kpf         ${k^{flex}}$            (long_name='Capital stock flex price economy') 
     kp          ${k}$           (long_name='Capital stock') 
     // The next two variables were added by Tom Holden for this repo.
+    z           ${z}$           (long_name='Non-inflation or monetary shock terms in the monetary rule')
     realr       ${r^r}$         (long_name='Real interest rate') 
     ;    
  
