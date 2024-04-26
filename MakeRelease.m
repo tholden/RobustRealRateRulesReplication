@@ -12,6 +12,10 @@ try
     delete private/autocorrNoMean.m; % This is generated automatically by Main.m based on a file distributed with MATLAB.
 catch
 end
+try
+    delete private/dynareNoMean.m; % This is generated automatically by Main.m based on a file distributed with Dynare.
+catch
+end
 warning( 'on', 'MATLAB:DELETE:FileNotFound' );
 
 warning( 'off', 'MATLAB:MKDIR:DirectoryExists' );
@@ -28,12 +32,18 @@ try
 catch
 end
 try
+    mkdir Release/SmetsWouters2007;
+catch
+end
+try
     mkdir Release/private;
 catch
 end
 
 % Copy the core files.
 copyfile Inputs/*.xlsx Release/Inputs/ f;
+copyfile SmetsWouters2007/*.mod Release/SmetsWouters2007/ f;
+copyfile SmetsWouters2007/*.mat Release/SmetsWouters2007/ f;
 copyfile private/*.m Release/private/ f;
 copyfile Main.m Release/ f;
 copyfile *.md Release/ f;

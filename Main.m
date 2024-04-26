@@ -28,6 +28,29 @@ catch
 end
 diary Outputs/Log.txt;
 
+%% Remove Dynare from the path, if present, as it can clash with some Matlab functions (e.g. arima).
+
+DynarePath = which( 'dynare.m' );
+
+if ~isempty( DynarePath )
+
+    % Create a modified version that does not turn on/off the diary!
+    Text = readlines( DynarePath );
+    Text = regexprep( Text, '^\s*diary\s+\S+\s*;?\s*$', '', 'lineanchors' );
+    Text = regexprep( Text, '^\s*diary\s*\(.*\)\s*;?\s*$', '', 'lineanchors' );
+    writelines( Text, 'private/dynareNoLog.m' );
+
+    % Get the Dynare root directory.
+    DynarePath = fileparts( DynarePath ); % The matlab sub-directory.
+    DynarePath = fileparts( DynarePath ); % The root Dynare directory.
+
+    % Remove Dynare from the path.
+    PathParts = strsplit( path, ';' );
+    Select = ~startsWith( PathParts, DynarePath, 'IgnoreCase', true );
+    path( strjoin( PathParts( Select ), ';' ) );
+
+end
+
 %% Create a modified version of autocorr.m.
 
 try
@@ -62,6 +85,8 @@ if DownloadLatestData
 end
 
 DGS5 = ReadFromFREDOrInputsFolder( 'DGS5', DownloadLatestData );
+
+LogRealPCEPerCapita = ReadFromFREDOrInputsFolder( 'A794RX0Q048SBEA', DownloadLatestData, 'Log' );
 
 LogCPIAUCSL   = ReadFromFREDOrInputsFolder( 'CPIAUCSL', DownloadLatestData, 'Log' );
 CCRateT5YIEM  = ReadFromFREDOrInputsFolder(   'T5YIEM', DownloadLatestData, 'CCRate' );
@@ -178,6 +203,76 @@ if DownloadVintageData
         rmdir FredFetch s;
     catch
     end
+
+end
+
+%% Estimate an ARMA(1,1) model of consumption growth.
+
+disp( ' ' );
+disp( '*** ONLINE APPENDIX C ***' );
+disp( ' ' );
+
+Dates = LogRealPCEPerCapita.Properties.RowTimes;
+
+disp( 'Sample for the t-distributed consumption growth ARMA(1,1) model (including the observation consumed by differencing) (Y, Q, Y, Q):' );
+disp( [ year( Dates( 1 ) ), quarter( Dates( 1 ) ), year( Dates( end ) ), quarter( Dates( end ) ) ] );
+disp( ' ' );
+
+disp( 'Estimation of the t-distributed consumption growth ARMA(1,1) model on this sample:' );
+disp( ' ' );
+
+Model = arima( 1, 0, 1 );
+Model.Distribution = 't';
+
+estimate( Model, diff( LogRealPCEPerCapita.LogA794RX0Q048SBEA ), 'AR0', 0.6, 'MA0', -0.4, 'Display', 'full', 'Options', optimoptions( 'fmincon', 'ConstraintTolerance', 1e-12, 'Display', 'iter-detailed', 'FiniteDifferenceType', 'central', 'MaxFunctionEvaluations', 1e12, 'MaxIterations', 1e12, 'OptimalityTolerance', 1e-12, 'StepTolerance', 1e-12, 'FunctionTolerance', 1e-12, 'UseParallel', true ) );
+
+Select = year( Dates ) <= 2019;
+
+LogRealPCEPerCapita = LogRealPCEPerCapita( Select, : );
+
+Dates = LogRealPCEPerCapita.Properties.RowTimes;
+
+disp( 'Sample for the Gaussian-distributed consumption growth ARMA(1,1) model (including the observation consumed by differencing) (Y, Q, Y, Q):' );
+disp( [ year( Dates( 1 ) ), quarter( Dates( 1 ) ), year( Dates( end ) ), quarter( Dates( end ) ) ] );
+disp( ' ' );
+
+disp( 'Estimation of the Gaussian-distributed consumption growth ARMA(1,1) model on this sample:' );
+disp( ' ' );
+
+Model = arima( 1, 0, 1 );
+
+estimate( Model, diff( LogRealPCEPerCapita.LogA794RX0Q048SBEA ), 'AR0', 0.6, 'MA0', -0.4, 'Display', 'full', 'Options', optimoptions( 'fmincon', 'ConstraintTolerance', 1e-12, 'Display', 'iter-detailed', 'FiniteDifferenceType', 'central', 'MaxFunctionEvaluations', 1e12, 'MaxIterations', 1e12, 'OptimalityTolerance', 1e-12, 'StepTolerance', 1e-12, 'FunctionTolerance', 1e-12, 'UseParallel', true ) );
+
+%% Examine how close (in some sense) the monetary rule of Smets Wouters (2007) is to a real rate rule.
+
+if ~isempty( DynarePath )
+
+    disp( 'Examination of how close (in some sense) the monetary rule of Smets Wouters (2007) is to a real rate rule.' );
+    disp( ' ' );
+
+    addpath( [ DynarePath '/matlab' ] );
+
+    cd SmetsWouters2007;
+
+    dynareNoLog Smets_Wouters_2007_45.mod noclearall nolog console nograph nointeractive nopreprocessoroutput nowarn notime;
+
+    cd ..;
+
+    disp( ' ' );
+    disp( 'Covariance matrix of z and the real interest rate:' );
+    disp( oo_.var );
+    disp( ' ' );
+    disp( 'Correlation between z and the real interest rate:' );
+    disp( oo_.var( 1, 2 ) / sqrt( oo_.var( 1, 1 ) * oo_.var( 2, 2 ) ) );
+    disp( ' ' );
+    disp( 'Standard deviation of z and the real interest rate:' );
+    disp( sqrt( diag( oo_.var ) ).' );
+    disp( ' ' );
+
+    % Remove Dynare from the path again.
+    PathParts = strsplit( path, ';' );
+    Select = ~startsWith( PathParts, DynarePath, 'IgnoreCase', true );
+    path( strjoin( PathParts( Select ), ';' ) );
 
 end
 
@@ -1085,7 +1180,12 @@ saveas( gcf, 'Outputs/PaperFigure1QuarterlyMod.svg' );
 
 %% Clean up.
 
-delete autocorrNoMean.m;
+if ~isempty( DynarePath )
+    addpath( [ DynarePath '/matlab' ] );
+    delete private/dynareNoLog.m;
+end
+
+delete private/autocorrNoMean.m;
 
 warning( 'on', 'MATLAB:DELETE:FileNotFound' );
 warning( 'on', 'MATLAB:table:ModifiedAndSavedVarnames' );
