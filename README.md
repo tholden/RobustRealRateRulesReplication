@@ -7,7 +7,7 @@ author:
 
 *The views expressed in this document are those of the author and do not represent the views of the Deutsche Bundesbank, the Eurosystem or its staﬀ.*
 
-[![DOI](https://zenodo.org/badge/780997704.svg)](https://zenodo.org/doi/10.5281/zenodo.11198015)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.11198781.svg)](https://doi.org/10.5281/zenodo.11198781)
 
 This document and the corresponding code and data originate from [the GitHub repository linked here](https://github.com/tholden/RobustRealRateRulesReplication).
 
